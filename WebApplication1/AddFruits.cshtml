@@ -1,0 +1,63 @@
+﻿@{
+    Layout = "~/Shared/_SiteLayout.cshtml";
+
+    var FruitTitle = "";
+    var Contributor = "";
+    var Popular = "";
+    var Price = "";
+
+    if (IsPost)
+    {
+        FruitTitle = Request["FruitTitle"];
+        Contributor = Request["Contributor"];
+        Popular = Request["Popular"];
+        Price = Request["Price"];
+
+        Validation.RequireFields("FruitTitle", "Contributor", "Popular", "Price");
+
+        var SQLInsert = "INSERT INTO Fruits (FruitTitle, Contributor, Popularity, Price) VALUES (@0,@1,@2,@3)";
+
+        if (Validation.IsValid())
+        {
+            try
+            {
+                var db = Database.Open("FruitDB"); // opening the connection string from web.config NOT the database
+                db.Execute(SQLInsert, FruitTitle, Contributor, Popular, Price);
+                Response.Write("Data Saved");
+            }
+            catch (Exception ex)
+            {
+                Response.Write(ex.Message);
+            }
+        }
+
+    }
+}
+
+<form method="post">
+    <fieldset>
+        <legend>Insert Data</legend>
+        @Html.ValidationSummary(true)
+        <div>
+            <label>Fruit Title</label>
+            <input type="text" value="@FruitTitle" name="FruitTitle" />
+            @Html.ValidationMessage("FruitTitle")
+        </div>
+
+        <div>
+            <label>Name of Contributor</label>
+            <input type="text" value="@Contributor" name="Contributor" />
+            @Html.ValidationMessage("Contributor")
+        </div>
+        <div>
+            <label>Popularity of Fruit</label>
+            <input type="text" value="@Popular" name="Popular" />
+            @Html.ValidationMessage("Popular")
+        </div>
+        <div>
+        <label>Expected Price of Fruit</label>
+        <input type="text" value="@Price" name="Price"/>
+        @Html.ValidationMessage("Price")
+        </div> <input type="submit" class="btn btn-success btn-group-lg" />
+    </fieldset>
+</form>

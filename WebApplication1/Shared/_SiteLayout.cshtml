@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@Page.Title</title>
+    <meta name="description" content="@Page.Description" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" /> />
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="@Href("~/Shared/Style.css")" type="text/css" />
+</head>
+<body>
+    <script src="~/scripts/ai.0.22.9-build00167.min.js"></script>
+    <script src="~/scripts/bootstrap.min.js"></script>
+    <script src="~/scripts/jquery-1.9.1.min.js"></script>
+    <div class="wrapper">
+        <div class="content">
+            <div class="row">
+                <section class="col-lg-12">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">
+                            <h1 class="center-block">&Omega;&Omega;Welcome to Nine Fruits!!&Omega;&Omega;</h1>
+                        </div>
+                        <div class="panel-body">
+                            <nav class="navbar navbar-inverse navbar-fixed-top">
+                                <ul class="nav nav-tabs navbar-nav">
+                                    <li> <a class="navbar-btn" href="@Href("~/HomePage.cshtml")"> HomePage</a></li>
+                                    <li><a class="navbar-btn" href="@Href("~/AddFruits.cshtml")"> Add a Fruit to DB</a></li>
+                                    <li><a class="navbar-btn" href="@Href("~/PepperDonculous.cshtml")"> Pepper Donculous</a></li>
+                                    <li><a class="navbar-btn" href="@Href("~/DevilsSpitDonculous.cshtml")"> Devil's Spit Donculous</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            @RenderBody()
+        </div>
+        <footer>@RenderPage("~/Shared/_Footer.cshtml")</footer>
+    </div>
+</body>
+</html>

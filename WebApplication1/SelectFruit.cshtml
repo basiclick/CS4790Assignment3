@@ -1,0 +1,25 @@
+﻿@{
+
+    var db = Database.Open("FruitDB");
+    var FruitTitle = Context.GetRouteValue("FruitTitle");
+
+    if (FruitTitle == null)
+    {
+        Response.Redirect("~/HomePage.cshtml");
+    }
+
+    var SQLREAD = "SELECT * FROM Fruits WHERE FruitTitle=@0";
+    var data = db.QuerySingle(SQLREAD, FruitTitle);
+    var Id = data.Id;
+
+    <div class="row">
+        <h2 class="center-block">@data.FruitTitle</h2>
+        <div class="col-lg-6">
+            <section>Added to database by: @data.Contributor</section>
+        </div>
+        <div class="col-lg-6">
+            <section>Popularity (0-100%): @data.Popularity</section>
+            <section>Expected Price: @data.Price</section>
+        </div>
+    </div>
+}

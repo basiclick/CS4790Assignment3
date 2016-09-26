@@ -1,0 +1,46 @@
+﻿@{
+    Layout = "~/Shared/_SiteLayout.cshtml";
+
+    var db = Database.Open("FruitDB");
+
+        var SQLREAD = "SELECT * FROM Fruits";
+        var data = db.Query(SQLREAD);
+    
+  
+}
+
+<div class="row">
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            <h1 class="center-block">Fruit Database</h1>
+            <p>Here are the current fruits and <em>associated</em> information.</p>
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <td>Fruit Title</td>
+                        <td>Name of contributor</td>
+                        <td>Popularity(1-10)</td>
+                        <td>Price</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ foreach (var fruit in data)
+                        {
+
+                            <tr>
+                                <td><a href="~/fruits/@fruit.FruitTitle">@fruit.FruitTitle</a></td>
+                                <td><a href="~/fruits/@fruit.Contributor">@fruit.Contributor</a></td>
+                                <td><a href="~/fruits/@fruit.Popularity">@fruit.Popularity</a></td>
+                                <td><a href="~/fruits/@fruit.Price">$@fruit.Price</a></td>
+                            </tr>
+
+
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
