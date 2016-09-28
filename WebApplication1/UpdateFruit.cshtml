@@ -1,13 +1,23 @@
 ﻿@{
     Layout = "~/Shared/_SiteLayout.cshtml";
+    var Id = Request["Id"];
 
-    var FruitTitle = "";
-    var Contributor = "";
-    var Popular = "";
-    var Price = "";
-    var FruitPic = "";
+    if(!Id.IsInt())
+    {
+        Response.Redirect("~/");
+    }
 
-    if (IsPost)
+    var db = Database.Open("FruitDB");
+    var SQLREAD = "SELECT * FROM Fruits WHERE Id=@0";
+    var data = db.QuerySingle(SQLREAD, Id);
+
+    var FruitTitle = data.FruitTitle;
+    var Contributor = data.Contributor;
+    var Popular = data.Popularity;
+    var Price = data.Price;
+    var FruitPic = data.FruitPic;
+
+    if(IsPost)
     {
         FruitTitle = Request["FruitTitle"];
         Contributor = Request["Contributor"];
@@ -15,25 +25,26 @@
         Price = Request["Price"];
         FruitPic = Request["FruitPic"];
 
+
         Validation.RequireFields("FruitTitle", "Contributor", "Popular", "Price");
 
-        var SQLInsert = "INSERT INTO Fruits (FruitTitle, Contributor, Popularity, Price, FruitPic) VALUES (@0,@1,@2,@3,@4)";
+        var SQLUPDATE = "UPDATE Fruits SET FruitTitle=@0, Contributor=@1, Popularity=@2, Price=@3, FruitPic=@4 WHERE Id=@5";
 
         if (Validation.IsValid())
         {
             try
             {
-                var db = Database.Open("FruitDB"); // opening the connection string from web.config NOT the database
-                db.Execute(SQLInsert, FruitTitle, Contributor, Popular, Price, FruitPic);
-                Response.Write("Data Saved");
+                db.Execute(SQLUPDATE, FruitTitle, Contributor, Popular, Price, FruitPic, Id);
+                Response.Write("The Fruit was Updated!!");
+                Response.Redirect("~/HomePage.cshtml");
             }
             catch (Exception ex)
             {
                 Response.Write(ex.Message);
             }
         }
-
     }
+
 }
 
 <form method="post">
@@ -57,9 +68,9 @@
             @Html.ValidationMessage("Popular")
         </div>
         <div>
-        <label>Expected Price of Fruit</label>
-        <input type="text" value="@Price" name="Price"/>
-        @Html.ValidationMessage("Price")
+            <label>Expected Price of Fruit</label>
+            <input type="text" value="@Price" name="Price" />
+            @Html.ValidationMessage("Price")
         </div> 
         <div>
             <label>Optional Picture of Fruit URL:</label>

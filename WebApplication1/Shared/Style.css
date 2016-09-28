@@ -1,3 +1,8 @@
 ﻿.content { 
     padding-top: 70px;
 }
+
+#centerIt{
+    text-align:center;
+    font-family:fantasy;
+}

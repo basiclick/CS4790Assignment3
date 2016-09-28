@@ -2,18 +2,20 @@
     Layout = "~/Shared/_SiteLayout.cshtml";
 
     var db = Database.Open("FruitDB");
+    var FruitTitle = Context.GetRouteValue("Price");
 
-        var SQLREAD = "SELECT * FROM Fruits";
-        var data = db.Query(SQLREAD);
-    
-  
+    if (FruitTitle == null)
+    {
+        Response.Redirect("~/HomePage.cshtml");
+    }
+
+    var SQLREAD = "SELECT * FROM Fruits WHERE Price = @0";
+    var data = db.Query(SQLREAD, FruitTitle);
 }
-
 <div class="row">
     <div class="panel panel-warning">
         <div class="panel-heading">
-            <h1 class="center-block">Fruit Database</h1>
-            <p>Here are the current fruits and <em>associated</em> information.</p>
+            <h1 class="center-block">Fruits that cost $@FruitTitle</h1>
         </div>
         <div class="panel-body">
             <table class="table table-hover table-bordered table-striped">
@@ -31,9 +33,9 @@
 
                             <tr>
                                 <td><a href="~/fruits/@fruit.FruitTitle">@fruit.FruitTitle</a></td>
-                                <td><a href="~/fruitsC/@fruit.Contributor">@fruit.Contributor</a></td>
-                                <td><a href="~/fruitsP/@fruit.Popularity">@fruit.Popularity</a></td>
-                                <td><a href="~/fruitPrice/@fruit.Price">$@fruit.Price</a></td>
+                                <td><a href="~/fruits/@fruit.Contributor">@fruit.Contributor</a></td>
+                                <td><a href="~/fruits/@fruit.Popularity">@fruit.Popularity</a></td>
+                                <td><a href="~/fruits/@fruit.Price">$@fruit.Price</a></td>
                             </tr>
 
 

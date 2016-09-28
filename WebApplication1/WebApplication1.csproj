@@ -150,6 +150,10 @@
     <Content Include="scripts\jquery-3.1.0.slim.min.map" />
     <Content Include="scripts\jquery-3.1.0.min.map" />
     <Content Include="SelectFruit.cshtml" />
+    <Content Include="SelectContributor.cshtml" />
+    <Content Include="SelectPopularity.cshtml" />
+    <Content Include="SelectPrice.cshtml" />
+    <Content Include="UpdateFruit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
