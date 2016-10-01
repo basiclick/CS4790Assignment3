@@ -29,12 +29,12 @@
         <div class="row">
             <div class="col">
                 <a class="btn btn-warning btn-lg btn-active" href="~/UpdateFruit.cshtml?id=@Id">Update this Fruit</a>
-                <a class="btn btn-warning btn-lg btn-active" href="~/DeleteFruit.cshtml?id=@Id">Remove this Fruit from Database</a>
+                <a class="btn btn-warning btn-lg btn-active" href="~/DeleteFruit.cshtml?id=@Id&returnurl=@Request.Url.AbsoluteUri">Remove this Fruit from Database</a>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <img src="@data.FruitPic" class="img img-responsive img-circle" />
+                <img style="align-content:center" src="@data.FruitPic" class="img img-responsive img-circle" />
                 </div>
             </div>
     </div>
