@@ -49,44 +49,47 @@
 
 <form method="post">
     <fieldset>
-        <legend>Insert Data</legend>
+        <legend class="text-center text-warning">Insert Data</legend>
         @Html.ValidationSummary(true)
         <div class="form-group row">
-            <label for="FruitName" class="col-lg-3">Fruit Title</label>
-            <div class="col-lg-9">
+            <label for="FruitName" class="col-sm-3 text-center text-warning">Fruit Title</label>
+            <div class="col-sm-6">
                 <input type="text" value="@FruitTitle" name="FruitTitle" id="FruitName" class="form-control" />
                 @Html.ValidationMessage("FruitTitle")
             </div>
         </div>
 
         <div class="form-group row">
-            <label for="contrib" class="col-lg-3">Name of Contributor</label>
-            <div class="col-lg-9">
+            <label for="contrib" class="col-sm-3 text-center text-warning">Name of Contributor</label>
+            <div class="col-sm-6">
                 <input type="text" value="@Contributor" name="Contributor" id="contrib" class="form-control" />
                 @Html.ValidationMessage("Contributor")
             </div>
         </div>
         <div class="form-group row">
-            <label for="popular" class="col-lg-3">Popularity of Fruit</label>
-            <div class="col-lg-9">
+            <label for="popular" class="col-sm-3 text-center text-warning">Popularity of Fruit</label>
+            <div class="col-sm-6 input-group">
                 <input id="popular" type="number" value="@Popular" name="Popular" class="form-control" />
+                <div class="input-group-addon">%</div>
                 @Html.ValidationMessage("Popular")
             </div>
         </div>
         <div class="form-group row">
-            <label for="price" class="col-lg-3">Expected Price of Fruit</label>
-            <div class="col-lg-9">
+            <label for="price" class="col-sm-3 text-center text-warning">Expected Price of Fruit</label>
+            <div class="col-sm-6 input-group">
+                <div class="input-group-addon">$</div>
                 <input type="number" value="@Price" name="Price" id="price" class="form-control" />
+                <div class="input-group-addon">.00</div>
                 @Html.ValidationMessage("Price")
             </div>
         </div>
         <div class="form-group row">
-            <label for="pict" class="col-lg-3">Optional Picture of Fruit URL:</label>
-            <div class="col-lg-9">
+            <label for="pict" class="col-sm-3 text-center text-warning">Optional Picture of Fruit URL:</label>
+            <div class="col-sm-6">
                 <input type="url" value="@FruitPic" name="FruitPic" id="pict" class="form-control" />
             </div>
         </div>
-        <div class="form-group row col-lg-12">
+        <div class="form-group row col-sm-12">
             <input type="submit" class="btn btn-success btn-group-lg" />
         </div>
     </fieldset>
